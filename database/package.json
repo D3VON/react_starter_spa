@@ -1,0 +1,14 @@
+{
+  "name": "pseudoDatabase",
+  "version": "0.1.0",
+  "description": "This is immitating a database.  Just sending back success for all requests.",
+  "author": "Devon McBride <devon@d3von.com> (http://www.d3von.com/projects.html)",
+  "scripts": {
+    "start": "nodemon --harmony ./server.js"
+  },
+  "dependencies": {
+    "axios": "^0.15.2",
+    "q": "^1.4.1",
+    "request": "^2.79.0"
+  }
+}
