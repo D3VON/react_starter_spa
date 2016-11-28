@@ -7,8 +7,6 @@
     "start": "nodemon --harmony ./server.js"
   },
   "dependencies": {
-    "axios": "^0.15.2",
-    "q": "^1.4.1",
-    "request": "^2.79.0"
+    "q": "^1.4.1"
   }
 }

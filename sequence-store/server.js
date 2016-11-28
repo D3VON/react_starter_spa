@@ -1,7 +1,10 @@
 var path = require('path')
 var express = require('express')
 var app = express()
+var favicon = require('serve-favicon')
+app.use(favicon(__dirname + '/favicon.ico'))
 var PORT = process.env.PORT || 8888
+const sequencedb = 'http://localhost:5959/' // fake db server at 5959
 
 // using webpack-dev-server and middleware in development environment
 if (process.env.NODE_ENV !== 'production') {
@@ -15,10 +18,9 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(webpackHotMiddleware(compiler))
 }
 
-var favicon = require('serve-favicon')
-app.use(favicon(__dirname + '/favicon.ico'))
-
-const sequencedb = 'http://localhost:5959/' // fake db server at 5959
+app.get('/', function (request, response) { // basic get route defined
+  response.sendFile(__dirname + '/dist/index.html')
+})
 
 /* The following 'require' enables this server to handle api requests like:
     curl -X GET http://localhost:8888/api/store_sequence/WNYV
@@ -29,10 +31,6 @@ const sequencedb = 'http://localhost:5959/' // fake db server at 5959
 require(__dirname + '/src/lib/store_sequence.js')(sequencedb, app) // other routes defined here
 
 app.use(express.static(path.join(__dirname, 'dist')))
-
-app.get('/', function (request, response) { // basic get route defined
-  response.sendFile(__dirname + '/dist/index.html')
-})
 
 app.listen(PORT, function (error) {
   if (error) {

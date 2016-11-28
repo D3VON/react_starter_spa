@@ -21,15 +21,15 @@ class SequenceForm extends React.Component {
       // Also, JSON.stringify() can be used like PHP's var_dump.
       // console.log(JSON.stringify(response)) // response.data: NY response.status: 200
       if (response.status === 200) {
-        // when the servers are working they will almost always return 200
+        // when the pseudo db server is working it will almost always return 200
         // it's up to this script to determin from the json object how the
         // storing of the sequence went.
-        // if ()
         console.log('response is: ' + JSON.stringify(response))
         console.log(typeof response.data)
         // response is: {"data":"PA","status":200,"statusText":"OK","headers...
         // response is: {"data":{"sequence":"P","verdict":"false"},"status":200...
-        // response.data is object, that's bad.  if it's string, that's good.
+        // if response.data is object, that's bad.
+        // if it's string, that's good.
         if (typeof response.data === 'string') {
           alert('Sequence is valid. ' + response.data + ' submitted to database.')
         } else if (typeof response.data === 'object') {

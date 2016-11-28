@@ -1,10 +1,3 @@
-/**
- * Excerpted from "Node.js the Right Way",
- * published by The Pragmatic Bookshelf.
- *
- * Just feed back to user the result of my algorithm
- * curl http://localhost:3000/store_sequence/NPWVAY
- */
 'use strict'
 const Q = require('q')
 const request = require('request')
@@ -98,6 +91,7 @@ module.exports = function (sequencedb, app) {
     }
   })
 
+  // this route provided for testing validation algorithm
   app.get('/api/store_sequence/:view', function (req, res) {
     let result = {}
     result = validateInput(req.params.view)

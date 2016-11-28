@@ -39,18 +39,6 @@ const server = http.createServer(function (req, res) {
     // Make a get request to fake db function
     // get request because it is in reality just reading, not updating anything.
     // db.js function will pause, therefore a promise is needed to receive response
-    // axios.get(db.store(theSequence, callbk))
-    // let deferred = Q.defer()
-    // deferred.resolve(db.store(theSequence, callbk))
-    // deferred.promise.then(function (args) {
-    //   console.log('RESPONSE IN THE FAKE DB SERVER: ' + JSON.stringify(args))
-      //   let dbResult = args[0], body = args[1];
-      //   res.json(dbResult.statusCode, body);
-      // }, function(err) {
-      //   res.json(502, { error: "bad_gateway", reason: err.code });
-      // })
-      // response => this.setState({ messages: response.data })
-      // console.log('RESPONSE IN THE FAKE DB SERVER: ' + JSON.stringify(response))
     Q.fcall(db.store(theSequence, callbk)) // promisedStep1
     // THERE JUST DOESN'T SEEM TO BE ANYTHING RETURNED ¯\_(ツ)_/¯
     // .then(function () {
@@ -58,19 +46,16 @@ const server = http.createServer(function (req, res) {
     //   console.log('RESPONSE IN THE FAKE DB SERVER: ')
     // })
     .catch(function (error) {
-      // Handle any error from all above steps
       console.log(error)
       res.writeHead(404, {'Content-Type': 'text/plain'})
       res.end('failure to write to db')
     })
     .done()
 
-    // result = JSON.stringify(args)
     res.writeHead(200, {'Content-Type': 'text/plain'})
     res.end(result)
   })
 })
-// })
 server.listen(5959, function () {
   console.log('Aye aye, Captain!')
 })
