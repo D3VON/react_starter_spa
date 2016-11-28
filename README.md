@@ -25,7 +25,9 @@ Technologies Used and Design Decisions Explained
 - validation of user input is in /sequence-store/src/lib/store_sequence.js
 - alert()s were used to indicate to the user that a given sequence passed 
   validation, and was "saved" by the pseudo database.
-- Some basic CSS has been provided for "niceness". 
+- Some basic CSS has been provided for "niceness".
+- PLEASE SEE the console of the fake database server as the SPA interacts with
+  it.  There is an error there I could not figure out. 
 
 In order to make the 'fake database' module seem like a real database, a
 Node server was set up to handle the REST request(s).  In particular, since the
