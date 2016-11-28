@@ -1,4 +1,4 @@
-Installation and Running
+### Installation and Running
 
 1.) Option 1: <code>git clone https://github.com/D3VON/react_starter_spa.git</code> <br>
     Option 2: If you have a zip file, unzip that and cd to that directory. There
@@ -11,13 +11,13 @@ Installation and Running
 3.) In your browser, go to <code>http://localhost:8888</code>
 
 
-Tests
+### Tests
 
 Attempts were made to test.  The developer was not able to implement any working
 tests, however.  nodeunit was used, and non-working files have been included in
 this project.
 
-Technologies Used and Design Decisions Explained
+### Technologies Used and Design Decisions Explained
 
 - Servers were made with Node.js and the Express framework.
 - Views were made using React.js
