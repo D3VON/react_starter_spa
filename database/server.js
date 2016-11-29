@@ -1,5 +1,4 @@
 'use strict'
-const Q = require('q') // promise library
 /**
  * Immitating a database.
  * I think it would have been easier for me to actually set up a database
@@ -27,33 +26,18 @@ var callbk = function (err, delay) {
 }
 
 const server = http.createServer(function (req, res) {
-  var incomingJsonString = ''
   req.on('data', function (data) { // receive incoming sequence
-    incomingJsonString += data
+    var json = JSON.parse(data)
+    theSequence = json.sequence
+    console.log("db server.js rec'd req string: " + theSequence)
+
+    // db.js function will pause
+    db.store(theSequence, callbk)
   })
   req.on('end', function () { // finish receiving incoming sequence
-    var json = JSON.parse(incomingJsonString)
-    theSequence = json.sequence
-  // console.log("db server.js rec'd req string: " + theSequence)
-    let result = theSequence
-    // Make a get request to fake db function
-    // get request because it is in reality just reading, not updating anything.
-    // db.js function will pause, therefore a promise is needed to receive response
-    Q.fcall(db.store(theSequence, callbk)) // promisedStep1
-    // THERE JUST DOESN'T SEEM TO BE ANYTHING RETURNED ¯\_(ツ)_/¯
-    // .then(function () {
-    //   result = 'The sequence ' + theSequence + ' was saved.'
-    //   console.log('RESPONSE IN THE FAKE DB SERVER: ')
-    // })
-    .catch(function (error) {
-      console.log(error)
-      res.writeHead(404, {'Content-Type': 'text/plain'})
-      res.end('failure to write to db')
-    })
-    .done()
 
     res.writeHead(200, {'Content-Type': 'text/plain'})
-    res.end(result)
+    res.end()
   })
 })
 server.listen(5959, function () {
