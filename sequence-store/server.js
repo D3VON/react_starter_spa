@@ -74,11 +74,11 @@ function validateInput (s) {
  */
 app.put('/api/store_sequence/:seq', function (req, res) {
   let result = {}
-  result = validateInput(req.params.seq)
+  result = validateInput(req.params.seq) // function returns a simple JSON obj.
   console.log('result of validateInput(): ' + JSON.stringify(result))
   if (result.verdict === '1') { // input is valid, send to db
     request.put({
-      url: sequencedb,
+      url: sequencedb, // url for the fake db
       // body: req.params.seq
       json: { 'sequence': req.params.seq }
     }, function (err, gotThisStuffBack) {
@@ -89,6 +89,7 @@ app.put('/api/store_sequence/:seq', function (req, res) {
         // beautiful output to server console.
         console.log('got this stuff back from put request to server: \n' + JSON.stringify(gotThisStuffBack))
         res.status(gotThisStuffBack.statusCode).json(gotThisStuffBack.body)
+        // res.end('It worked!')
       }
     })
   } else {
